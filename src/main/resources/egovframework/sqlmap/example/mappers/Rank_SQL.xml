@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sehyunict.rank.mapper.RankMapper">
+
+	<resultMap id="rank" type="com.sehyunict.rank.vo.RankVO">
+		<result property="emp_rank_idx" column="emp_rank_idx"/>
+		<result property="emp_rank_code" column="emp_rank_code"/>
+		<result property="emp_rank_name" column="emp_rank_name"/>
+		<result property="emp_rank_reg_user" column="emp_rank_reg_user"/>
+		<result property="emp_rank_reg_date" column="emp_rank_reg_date"/>
+		<result property="emp_rank_mod_user" column="emp_rank_mod_user"/>
+		<result property="emp_rank_mod_date" column="emp_rank_mod_date"/>
+		<result property="emp_rank_use_Yn" column="emp_rank_use_yn"/>
+	</resultMap>
+
+	<update id="changeUseYn" parameterType="com.sehyunict.rank.vo.RankVO">
+			<![CDATA[
+				UPDATE TBM_EMP_RANK SET 
+					EMP_RANK_USE_YN = 'N'
+				WHERE
+					EMP_RANK_IDX = #{emp_rank_idx}
+			]]>
+	</update>
+
+
+
+	<select id="selectRankList" parameterType="com.sehyunict.rank.vo.RankVO" resultType="com.sehyunict.rank.vo.RankVO">
+			<![CDATA[
+				SELECT
+					EMP_RANK_IDX,
+					EMP_RANK_CODE, 
+					EMP_RANK_NAME, 
+					EMP_RANK_REG_USER, 
+					EMP_RANK_REG_DATE, 
+					EMP_RANK_MOD_USER,
+					EMP_RANK_MOD_DATE,
+					EMP_RANK_USE_YN
+				FROM 
+					TBM_EMP_RANK
+				WHERE 1=1
+				ORDER BY EMP_RANK_IDX ASC
+			]]>
+	</select>
+
+</mapper>
